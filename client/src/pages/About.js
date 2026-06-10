@@ -13,13 +13,13 @@ function useWindowWidth() {
 }
 
 const values = [
-  { icon:'⚖️', name:'Ethical' },
-  { icon:'🩺', name:'Clinical' },
-  { icon:'💻', name:'Technical' },
-  { icon:'📈', name:'Analytical' },
-  { icon:'🔄', name:'Adaptive' },
-  { icon:'💜', name:'Empathetic' },
-  { icon:'🏆', name:'Professional' },
+  { icon:'⚖️', name:'Ethical'        },
+  { icon:'🩺', name:'Clinical'       },
+  { icon:'💻', name:'Technical'      },
+  { icon:'📈', name:'Analytical'     },
+  { icon:'🔄', name:'Adaptive'       },
+  { icon:'💜', name:'Empathetic'     },
+  { icon:'🏆', name:'Professional'   },
   { icon:'🚀', name:'Transformative' },
 ];
 
@@ -36,195 +36,278 @@ export default function About() {
   const width    = useWindowWidth();
   const isMobile = width < 900;
 
-  const cardStyle = {
-    background:   '#ffffff',
-    border:       '1px solid rgba(15,61,56,0.12)',
-    borderRadius: 16,
-    padding:      isMobile ? '24px 20px' : '36px 32px',
-    boxShadow:    '0 2px 16px rgba(15,61,56,0.07)',
-    boxSizing:    'border-box',
-    width:        '100%',
-  };
-
   return (
     <div style={{ background:'#ffffff', color:'#0f3d38', overflowX:'hidden' }}>
 
-      {/* ── Intro ── */}
+      {/* ── HERO / INTRO ── */}
       <div style={{
         display:       'flex',
         flexDirection: isMobile ? 'column' : 'row',
-        gap:           isMobile ? 24 : 64,
-        padding:       isMobile ? '100px 20px 48px' : '100px 48px 64px',
+        gap:           isMobile ? 32 : 64,
+        padding:       isMobile ? '88px 20px 48px' : '96px 64px 64px',
         maxWidth:      1280,
         margin:        '0 auto',
         boxSizing:     'border-box',
         alignItems:    'flex-start',
+        background:    'linear-gradient(160deg, #e6f7f4 0%, #ffffff 60%)',
       }}>
+
         {/* Left text */}
         <div style={{ flex:1, minWidth:0 }}>
-          <p className="eyebrow">About OCTA</p>
-          <h2 className="sec-title" style={{ marginBottom:20 }}>
+          {/* Eyebrow */}
+          <div style={{
+            display:'inline-flex', alignItems:'center', gap:8,
+            fontSize:12, fontWeight:600, letterSpacing:'0.2em',
+            textTransform:'uppercase', color:'#1a9080', marginBottom:16,
+          }}>
+            <span style={{ display:'block', width:24, height:2, background:'#1a9080', borderRadius:2 }} />
+            About OCTA
+          </div>
+
+          <h1 style={{
+            fontFamily:    'Sora, sans-serif',
+            fontSize:      isMobile ? 30 : 'clamp(34px,4vw,52px)',
+            fontWeight:    800,
+            lineHeight:    1.1,
+            letterSpacing: '-0.02em',
+            color:         '#0f3d38',
+            marginBottom:  20,
+          }}>
             Transforming Healthcare Education{' '}
-            <em>Through Technology</em>
-          </h2>
-          <p style={{ fontSize:15, fontWeight:300, lineHeight:1.8, color:'#2d6b65', marginBottom:16 }}>
+            <span style={{ color:'#1a9080' }}>Through Technology</span>
+          </h1>
+
+          <p style={{ fontSize:16, fontWeight:300, lineHeight:1.8, color:'#2d6b65', marginBottom:16 }}>
             OCTA is dedicated to elevating clinical excellence across medical institutions across India.
           </p>
-          <p style={{ fontSize:15, fontWeight:300, lineHeight:1.8, color:'#2d6b65', marginBottom:28 }}>
-            Our mission: elevate clinical competence and patient safety through evidence-based, standards-aligned, technology-enabled training that transforms healthcare delivery.
+          <p style={{ fontSize:16, fontWeight:300, lineHeight:1.8, color:'#2d6b65', marginBottom:28 }}>
+            Our mission: elevate clinical competence and patient safety through evidence-based,
+            standards-aligned, technology-enabled training that transforms healthcare delivery.
           </p>
+
+          {/* Pills */}
           <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
             {['Founded by Clinicians','IMC Certified','NMCI Certified'].map(p => (
-              <span key={p} className="pill">{p}</span>
+              <span key={p} style={{
+                display:'inline-flex', alignItems:'center',
+                padding:'6px 16px',
+                background:'#e6f7f4', color:'#0f6b5e',
+                border:'1px solid #b3e8de', borderRadius:50,
+                fontSize:13, fontWeight:500,
+              }}>{p}</span>
             ))}
           </div>
         </div>
 
-        {/* Right: founder cards stacked */}
+        {/* Right: two founder cards */}
         <div style={{
-          flex:      isMobile ? 'none' : 1,
-          width:     '100%',
-          display:   'flex',
+          flex:          isMobile ? 'none' : 1,
+          width:         '100%',
+          display:       'flex',
           flexDirection: 'column',
-          gap:       16,
+          gap:           16,
         }}>
-          {/* CEO card */}
-          <div style={cardStyle}>
-            <img
-              src={priyankaPhoto}
-              alt="Priyanka Edupuganti"
-              style={{ width:64, height:64, borderRadius:'50%', objectFit:'cover', marginBottom:14, border:'2px solid #2d7a70', display:'block' }}
-            />
-            <div style={{ fontFamily:'Sora,sans-serif', fontSize:17, fontWeight:700, color:'#0f3d38', marginBottom:3 }}>
-              Priyanka Edupuganti
+
+          {/* Priyanka — CEO */}
+          <div style={{
+            background:   '#ffffff',
+            border:       '1px solid rgba(15,61,56,0.12)',
+            borderRadius: 20,
+            padding:      isMobile ? '24px 20px' : '32px 28px',
+            boxShadow:    '0 2px 16px rgba(15,61,56,0.07)',
+            boxSizing:    'border-box',
+            width:        '100%',
+            transition:   'box-shadow .3s, transform .3s',
+          }}>
+            <div style={{ display:'flex', alignItems:'center', gap:16, marginBottom:16 }}>
+              <img
+                src={priyankaPhoto}
+                alt="Priyanka Edupuganti"
+                style={{
+                  width:72, height:72, borderRadius:'50%',
+                  objectFit:'cover', objectPosition:'top center',
+                  border:'3px solid #1a9080', flexShrink:0,
+                }}
+              />
+              <div>
+                <div style={{ fontFamily:'Sora,sans-serif', fontSize:17, fontWeight:800, color:'#0f3d38', marginBottom:3 }}>
+                  Priyanka Edupuganti
+                </div>
+                <div style={{ fontSize:11, letterSpacing:'0.12em', textTransform:'uppercase', color:'#1a9080', fontWeight:600 }}>
+                  Founder & Chief Executive Officer
+                </div>
+                <a href="mailto:partnerships@brivox.in" style={{ fontSize:12, color:'#1a9080', textDecoration:'none', display:'block', marginTop:4 }}>
+                  📧 partnerships@brivox.in
+                </a>
+              </div>
             </div>
-            <div style={{ fontSize:11, letterSpacing:'0.12em', textTransform:'uppercase', color:'#4a9e94', marginBottom:12 }}>
-              Founder & Chief Executive Officer
-            </div>
+            <div style={{ height:1, background:'rgba(15,61,56,0.1)', marginBottom:14 }} />
             <p style={{ fontSize:14, fontWeight:300, lineHeight:1.75, color:'#2d6b65', fontStyle:'italic', margin:0 }}>
-              "Healthcare is evolving rapidly, and technology will shape the way professionals learn, collaborate, and deliver care. Through OCTA, we are preparing the next generation to thrive in this technology-driven healthcare ecosystem."
+              "Healthcare is evolving rapidly, and technology will shape the way professionals learn,
+              collaborate, and deliver care. Through OCTA, we are preparing the next generation to
+              thrive in this technology-driven healthcare ecosystem."
             </p>
           </div>
 
-          {/* Co-founder card */}
-          <div style={cardStyle}>
-            <img
-              src={coFounderPhoto}
-              alt="Co-Founder"
-              style={{ width:64, height:64, borderRadius:'50%', objectFit:'cover', objectPosition:'top', marginBottom:14, border:'2px solid #2d7a70', display:'block' }}
-            />
-            <div style={{ fontFamily:'Sora,sans-serif', fontSize:17, fontWeight:700, color:'#0f3d38', marginBottom:3 }}>
-              Co-Founder
+          {/* Jay — Co-founder */}
+          <div style={{
+            background:   '#ffffff',
+            border:       '1px solid rgba(15,61,56,0.12)',
+            borderRadius: 20,
+            padding:      isMobile ? '24px 20px' : '32px 28px',
+            boxShadow:    '0 2px 16px rgba(15,61,56,0.07)',
+            boxSizing:    'border-box',
+            width:        '100%',
+            transition:   'box-shadow .3s, transform .3s',
+          }}>
+            <div style={{ display:'flex', alignItems:'center', gap:16, marginBottom:16 }}>
+              <img
+                src={coFounderPhoto}
+                alt="Jay Parvathaneni"
+                style={{
+                  width:72, height:72, borderRadius:'50%',
+                  objectFit:'cover', objectPosition:'top center',
+                  border:'3px solid #1a9080', flexShrink:0,
+                }}
+              />
+              <div>
+                <div style={{ fontFamily:'Sora,sans-serif', fontSize:17, fontWeight:800, color:'#0f3d38', marginBottom:3 }}>
+                  Jay Parvathaneni
+                </div>
+                <div style={{ fontSize:11, letterSpacing:'0.12em', textTransform:'uppercase', color:'#1a9080', fontWeight:600 }}>
+                  Co-Founder & Chief Technology Officer
+                </div>
+              </div>
             </div>
-            <div style={{ fontSize:11, letterSpacing:'0.12em', textTransform:'uppercase', color:'#4a9e94', marginBottom:12 }}>
-              Co-Founder & Chief Technology Officer
-            </div>
+            <div style={{ height:1, background:'rgba(15,61,56,0.1)', marginBottom:14 }} />
             <p style={{ fontSize:14, fontWeight:300, lineHeight:1.75, color:'#2d6b65', fontStyle:'italic', margin:0 }}>
-              "Building technology that empowers healthcare professionals to deliver better patient outcomes — that's what drives every line of code we write at OCTA."
+              "Building technology that empowers healthcare professionals to deliver better patient
+              outcomes — that's what drives every line of code we write at OCTA."
             </p>
           </div>
+
         </div>
       </div>
 
-      <div className="divider" />
+      {/* ── DIVIDER ── */}
+      <div style={{ height:1, background:'#e8eceb', margin: isMobile ? '0 20px' : '0 64px' }} />
 
-      {/* ── Certifications ── */}
-      <div style={{ padding: isMobile ? '48px 20px' : '64px 48px', maxWidth:1280, margin:'0 auto', boxSizing:'border-box' }}>
-        <p className="eyebrow">Officially Recognised</p>
-        <h2 className="sec-title">Our <em>Certifications</em></h2>
+      {/* ── CERTIFICATIONS ── */}
+      <div style={{ padding: isMobile ? '48px 20px' : '72px 64px', maxWidth:1280, margin:'0 auto', boxSizing:'border-box' }}>
+        <div style={{ display:'inline-flex', alignItems:'center', gap:8, fontSize:12, fontWeight:600, letterSpacing:'0.2em', textTransform:'uppercase', color:'#1a9080', marginBottom:16 }}>
+          <span style={{ display:'block', width:24, height:2, background:'#1a9080', borderRadius:2 }} />
+          Officially Recognised
+        </div>
+        <h2 style={{ fontFamily:'Sora,sans-serif', fontSize: isMobile ? 28 : 40, fontWeight:800, color:'#0f3d38', marginBottom:32 }}>
+          Our <span style={{ color:'#1a9080' }}>Certifications</span>
+        </h2>
         <div style={{
-          display:             'grid',
+          display:'grid',
           gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-          gap:                 16,
-          marginTop:           32,
-          maxWidth:            720,
+          gap:16, maxWidth:720,
         }}>
           {[
-            ['👨‍⚕️','Indian Medical Council','IMC'],
-            ['❤️','Nursing & Midwifery Council of India','NMCI'],
-          ].map(([icon, name, abbr]) => (
+            ['👨‍⚕️','Indian Medical Council','IMC','Officially certified training provider for medical professionals across India.'],
+            ['❤️','Nursing & Midwifery Council of India','NMCI','Recognised provider of nursing education and professional development programmes.'],
+          ].map(([icon, name, abbr, desc]) => (
             <div key={abbr} style={{
-              background:  '#ffffff',
-              border:      '1px solid rgba(15,61,56,0.12)',
+              background:'#ffffff',
+              border:'1px solid rgba(15,61,56,0.12)',
               borderRadius:16,
-              padding:     isMobile ? '28px 20px' : '36px 28px',
-              textAlign:   'center',
-              boxShadow:   '0 2px 12px rgba(15,61,56,0.06)',
-              boxSizing:   'border-box',
-            }}>
-              <div style={{ width:60, height:60, background:'rgba(15,61,56,0.06)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontSize:26, margin:'0 auto 14px' }}>{icon}</div>
-              <div style={{ fontFamily:'Sora,sans-serif', fontSize:16, fontWeight:700, color:'#0f3d38', marginBottom:4 }}>{name}</div>
-              <div style={{ fontSize:11, letterSpacing:'0.15em', color:'#4a9e94', textTransform:'uppercase', marginBottom:14 }}>{abbr}</div>
-              <span className="pill">✓ Certified Institution</span>
+              padding: isMobile ? '28px 20px' : '36px 28px',
+              textAlign:'center',
+              boxShadow:'0 2px 12px rgba(15,61,56,0.06)',
+              boxSizing:'border-box',
+              transition:'all .3s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.boxShadow='0 12px 32px rgba(15,61,56,0.12)'; e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.borderColor='#1a9080'; }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow='0 2px 12px rgba(15,61,56,0.06)'; e.currentTarget.style.transform=''; e.currentTarget.style.borderColor='rgba(15,61,56,0.12)'; }}
+            >
+              <div style={{ width:68, height:68, background:'#e6f7f4', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontSize:30, margin:'0 auto 16px', border:'2px solid #b3e8de' }}>{icon}</div>
+              <div style={{ fontFamily:'Sora,sans-serif', fontSize:17, fontWeight:700, color:'#0f3d38', marginBottom:4 }}>{name}</div>
+              <div style={{ fontSize:11, fontWeight:700, letterSpacing:'0.15em', color:'#1a9080', textTransform:'uppercase', marginBottom:10 }}>{abbr}</div>
+              <p style={{ fontSize:13, color:'#2d6b65', lineHeight:1.6, marginBottom:16 }}>{desc}</p>
+              <span style={{ display:'inline-flex', alignItems:'center', padding:'6px 16px', background:'#e6f7f4', color:'#0f6b5e', border:'1px solid #b3e8de', borderRadius:50, fontSize:13, fontWeight:500 }}>✓ Certified Institution</span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="divider" />
+      {/* ── DIVIDER ── */}
+      <div style={{ height:1, background:'#e8eceb', margin: isMobile ? '0 20px' : '0 64px' }} />
 
-      {/* ── Core Values ── */}
-      <div style={{ padding: isMobile ? '48px 20px' : '64px 48px', maxWidth:1280, margin:'0 auto', boxSizing:'border-box' }}>
-        <p className="eyebrow">Eight Pillars of Excellence</p>
-        <h2 className="sec-title">Our <em>Core Values</em></h2>
+      {/* ── CORE VALUES ── */}
+      <div style={{ padding: isMobile ? '48px 20px' : '72px 64px', maxWidth:1280, margin:'0 auto', boxSizing:'border-box' }}>
+        <div style={{ display:'inline-flex', alignItems:'center', gap:8, fontSize:12, fontWeight:600, letterSpacing:'0.2em', textTransform:'uppercase', color:'#1a9080', marginBottom:16 }}>
+          <span style={{ display:'block', width:24, height:2, background:'#1a9080', borderRadius:2 }} />
+          Eight Pillars of Excellence
+        </div>
+        <h2 style={{ fontFamily:'Sora,sans-serif', fontSize: isMobile ? 28 : 40, fontWeight:800, color:'#0f3d38', marginBottom:32 }}>
+          Our <span style={{ color:'#1a9080' }}>Core Values</span>
+        </h2>
         <div style={{
-          display:             'grid',
+          display:'grid',
           gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)',
-          gap:                 isMobile ? 10 : 16,
-          marginTop:           32,
+          gap: isMobile ? 10 : 16,
         }}>
           {values.map(v => (
             <div key={v.name} style={{
-              background:   '#ffffff',
-              border:       '1px solid rgba(15,61,56,0.12)',
-              borderRadius: 14,
-              padding:      isMobile ? '16px 10px' : '24px',
-              textAlign:    'center',
-              boxShadow:    '0 2px 8px rgba(15,61,56,0.05)',
-              transition:   'all .3s',
-              cursor:       'default',
-              boxSizing:    'border-box',
+              background:'#ffffff',
+              border:'1px solid rgba(15,61,56,0.12)',
+              borderRadius:14,
+              padding: isMobile ? '18px 10px' : '24px',
+              textAlign:'center',
+              boxShadow:'0 2px 8px rgba(15,61,56,0.05)',
+              transition:'all .3s',
+              cursor:'default',
+              boxSizing:'border-box',
             }}
-            onMouseEnter={e => { e.currentTarget.style.background='rgba(15,61,56,0.04)'; e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 12px 28px rgba(15,61,56,0.10)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background='#ffffff'; e.currentTarget.style.transform=''; e.currentTarget.style.boxShadow='0 2px 8px rgba(15,61,56,0.05)'; }}
+            onMouseEnter={e => { e.currentTarget.style.background='#e6f7f4'; e.currentTarget.style.borderColor='#1a9080'; e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 12px 28px rgba(15,61,56,0.10)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background='#ffffff'; e.currentTarget.style.borderColor='rgba(15,61,56,0.12)'; e.currentTarget.style.transform=''; e.currentTarget.style.boxShadow='0 2px 8px rgba(15,61,56,0.05)'; }}
             >
-              <div style={{ fontSize: isMobile ? 22 : 28, marginBottom:8 }}>{v.icon}</div>
-              <div style={{ fontFamily:'Sora,sans-serif', fontSize: isMobile ? 11 : 14, fontWeight:600, color:'#0f3d38' }}>{v.name}</div>
+              <div style={{ fontSize: isMobile ? 24 : 30, marginBottom:10 }}>{v.icon}</div>
+              <div style={{ fontFamily:'Sora,sans-serif', fontSize: isMobile ? 12 : 14, fontWeight:700, color:'#0f3d38' }}>{v.name}</div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="divider" />
+      {/* ── DIVIDER ── */}
+      <div style={{ height:1, background:'#e8eceb', margin: isMobile ? '0 20px' : '0 64px' }} />
 
-      {/* ── Strategic Frameworks ── */}
-      <div style={{ padding: isMobile ? '48px 20px' : '64px 48px', maxWidth:1280, margin:'0 auto', boxSizing:'border-box' }}>
-        <p className="eyebrow">Brand Strategy</p>
-        <h2 className="sec-title">Our <em>Strategic Frameworks</em></h2>
-        <p className="sec-lead" style={{ marginBottom:32 }}>
+      {/* ── STRATEGIC FRAMEWORKS ── */}
+      <div style={{ padding: isMobile ? '48px 20px' : '72px 64px', maxWidth:1280, margin:'0 auto', boxSizing:'border-box' }}>
+        <div style={{ display:'inline-flex', alignItems:'center', gap:8, fontSize:12, fontWeight:600, letterSpacing:'0.2em', textTransform:'uppercase', color:'#1a9080', marginBottom:16 }}>
+          <span style={{ display:'block', width:24, height:2, background:'#1a9080', borderRadius:2 }} />
+          Brand Strategy
+        </div>
+        <h2 style={{ fontFamily:'Sora,sans-serif', fontSize: isMobile ? 28 : 40, fontWeight:800, color:'#0f3d38', marginBottom:12 }}>
+          Our <span style={{ color:'#1a9080' }}>Strategic Frameworks</span>
+        </h2>
+        <p style={{ fontSize:16, fontWeight:300, lineHeight:1.75, color:'#2d6b65', marginBottom:36, maxWidth:580 }}>
           OCTA operates at the intersection of clinical credibility, technological innovation, and empathetic design.
         </p>
         <div style={{
-          display:             'grid',
+          display:'grid',
           gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)',
-          gap:                 isMobile ? 12 : 20,
+          gap: isMobile ? 12 : 20,
         }}>
           {strategies.map(s => (
             <div key={s.n} style={{
-              background:   '#ffffff',
-              border:       '1px solid rgba(15,61,56,0.12)',
-              borderRadius: 16,
-              padding:      isMobile ? '22px 18px' : '36px 28px',
-              boxShadow:    '0 2px 12px rgba(15,61,56,0.06)',
-              boxSizing:    'border-box',
-              transition:   'all .3s',
+              background:'#ffffff',
+              border:'1px solid rgba(15,61,56,0.12)',
+              borderRadius:16,
+              padding: isMobile ? '22px 18px' : '36px 28px',
+              boxShadow:'0 2px 12px rgba(15,61,56,0.06)',
+              boxSizing:'border-box',
+              transition:'all .3s',
             }}
-            onMouseEnter={e => { e.currentTarget.style.boxShadow='0 12px 32px rgba(15,61,56,0.10)'; e.currentTarget.style.transform='translateY(-3px)'; }}
-            onMouseLeave={e => { e.currentTarget.style.boxShadow='0 2px 12px rgba(15,61,56,0.06)'; e.currentTarget.style.transform=''; }}
+            onMouseEnter={e => { e.currentTarget.style.boxShadow='0 12px 32px rgba(15,61,56,0.10)'; e.currentTarget.style.transform='translateY(-3px)'; e.currentTarget.style.borderColor='#1a9080'; }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow='0 2px 12px rgba(15,61,56,0.06)'; e.currentTarget.style.transform=''; e.currentTarget.style.borderColor='rgba(15,61,56,0.12)'; }}
             >
-              <div style={{ fontFamily:'Sora,sans-serif', fontSize: isMobile ? 32 : 48, fontWeight:800, color:'rgba(15,61,56,0.10)', lineHeight:1, marginBottom:12 }}>{s.n}</div>
-              <div className="card-title">{s.title}</div>
-              <div className="card-body">{s.body}</div>
+              <div style={{ fontFamily:'Sora,sans-serif', fontSize: isMobile ? 36 : 48, fontWeight:800, color:'rgba(15,61,56,0.08)', lineHeight:1, marginBottom:12 }}>{s.n}</div>
+              <div style={{ fontFamily:'Sora,sans-serif', fontSize:16, fontWeight:700, color:'#0f3d38', marginBottom:8 }}>{s.title}</div>
+              <div style={{ fontSize:14, lineHeight:1.7, color:'#2d6b65' }}>{s.body}</div>
             </div>
           ))}
         </div>
