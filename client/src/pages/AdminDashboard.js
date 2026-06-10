@@ -70,7 +70,7 @@ export default function AdminDashboard() {
   const filtered = filter ? enquiries.filter(e => e.status === filter) : enquiries;
 
   if (loading) return (
-    <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'#0f2724' }}>
+    <div className="admin-page" style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center' }}>
       <div style={{ textAlign:'center' }}>
         <div style={{ fontSize:32, marginBottom:16 }}>⏳</div>
         <p style={{ color:'rgba(255,255,255,0.6)', fontSize:16 }}>Loading dashboard…</p>
@@ -79,12 +79,10 @@ export default function AdminDashboard() {
   );
 
   return (
-    <div style={{
-      minHeight:  '100vh',
-      background: 'linear-gradient(135deg, #0f2724 0%, #1a3d3a 50%, #0f2724 100%)',
-      color:      '#fff',
-      padding:    isMobile ? '80px 16px 40px' : '100px 48px 60px',
-      boxSizing:  'border-box',
+    // ↓ ONLY CHANGE: className="admin-page" added, background/color removed from style
+    <div className="admin-page" style={{
+      padding:   isMobile ? '80px 16px 40px' : '100px 48px 60px',
+      boxSizing: 'border-box',
     }}>
       {toast && <Toast message={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
 
@@ -289,7 +287,6 @@ export default function AdminDashboard() {
             ))}
           </div>
         ) : (
-          /* Desktop table */
           <>
             <div style={{ overflowX:'auto' }}>
               <table style={{ width:'100%', borderCollapse:'collapse' }}>

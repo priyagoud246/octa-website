@@ -358,3 +358,23 @@ footer p, .footer p { color:rgba(255,255,255,0.60) !important; }
   /* Stats: keep 2-col even on very small screens */
   .stats-strip  { grid-template-columns:1fr 1fr; }
 }
+/* ── Admin Dashboard dark override ── */
+.admin-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2724 0%, #1a3d3a 50%, #0f2724 100%) !important;
+  color: #fff !important;
+}
+
+.admin-page .sec-title,
+.admin-page .eyebrow,
+.admin-page h1,
+.admin-page h2,
+.admin-page h3,
+.admin-page h4,
+.admin-page p {
+  color: #fff !important;
+}
+
+.admin-page .eyebrow {
+  color: #6ddbc9 !important;
+}
