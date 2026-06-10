@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
+import clinicalImg from '../assets/images/clinical-assessment.webp';
 
 const stacks = [
   { title: 'Foundation Stack', desc: 'Mandatory statutory training, fire safety, infection control, and hand hygiene.', icon: '🛡️' },
@@ -33,6 +34,19 @@ export default function Courses() {
             <span key={p} className="pill">{p}</span>
           ))}
         </div>
+
+        {/* clinical-assessment image — full height, no crop */}
+        <img
+          src={clinicalImg}
+          alt="Two nursing students using stethoscopes to assess a simulation mannequin"
+          style={{
+            width: '100%',
+            display: 'block',
+            borderRadius: 20,
+            border: '1px solid var(--t18)',
+            marginTop: 36,
+          }}
+        />
       </div>
 
       <div className="divider" />
@@ -44,7 +58,7 @@ export default function Courses() {
             <div key={s.title} className="glass-card" style={{ padding: 24 }}>
               <div style={{ fontSize: 32, marginBottom: 16 }}>{s.icon}</div>
               <div className="card-title">{s.title}</div>
-              <div className="card-body" style={{ fontSize: 13, color: 'var(--w60)' }}>{s.desc}</div>
+              <div className="card-body" style={{ fontSize: 13, color: 'var(--teal-deep)' }}>{s.desc}</div>
             </div>
           ))}
         </div>
@@ -56,28 +70,56 @@ export default function Courses() {
       <div className="section">
         <p className="eyebrow" style={{ marginBottom: 32 }}>All Available Modules</p>
         {loading ? (
-          <p style={{ color: 'var(--w60)' }}>Loading modules...</p>
+          <p style={{ color: 'var(--teal-deep)' }}>Loading modules...</p>
         ) : (
           <div className="grid-3">
             {courses.map(c => (
-              <div key={c._id} style={{
-                background: 'var(--w08)', border: '1px solid var(--w15)',
-                borderRadius: 20, overflow: 'hidden',
-                backdropFilter: 'blur(16px)', transition: 'all .3s', cursor: 'pointer'
-              }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.borderColor = 'var(--w30)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.borderColor = 'var(--w15)'; }}>
-                <div style={{ padding: '28px 28px 20px', borderBottom: '1px solid var(--w08)' }}>
-                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--mist)', marginBottom: 12 }}>{c.badge}</div>
-                  <div style={{ fontFamily: 'Sora,sans-serif', fontSize: 18, fontWeight: 600, lineHeight: 1.3, marginBottom: 10 }}>{c.title}</div>
-                  <div style={{ fontSize: 13, color: 'var(--w60)', lineHeight: 1.6 }}>{c.description}</div>
+              <div
+                key={c._id}
+                style={{
+                  background: 'var(--t06)',
+                  border: '1px solid var(--t18)',
+                  borderRadius: 20,
+                  overflow: 'hidden',
+                  transition: 'all .3s',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = 'translateY(-6px)';
+                  e.currentTarget.style.borderColor = 'var(--t25)';
+                  e.currentTarget.style.boxShadow = '0 20px 48px rgba(15,61,56,0.10)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = '';
+                  e.currentTarget.style.borderColor = 'var(--t18)';
+                  e.currentTarget.style.boxShadow = '';
+                }}
+              >
+                <div style={{ padding: '28px 28px 20px', borderBottom: '1px solid var(--t10)' }}>
+                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--sage)', marginBottom: 12 }}>{c.badge}</div>
+                  <div style={{ fontFamily: 'Sora,sans-serif', fontSize: 18, fontWeight: 600, lineHeight: 1.3, marginBottom: 10, color: 'var(--teal-dark)' }}>{c.title}</div>
+                  <div style={{ fontSize: 13, color: 'var(--teal-deep)', lineHeight: 1.6 }}>{c.description}</div>
                 </div>
                 <div style={{ padding: '18px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ fontSize: 12, color: 'var(--w60)' }}>⏱ {c.duration}</div>
-                  <button onClick={() => navigate('/contact')} style={{
-                    padding: '8px 20px', background: 'var(--w15)', border: '1px solid var(--w30)',
-                    borderRadius: 50, fontSize: 12, fontWeight: 500, color: '#fff', cursor: 'pointer'
-                  }}>Enquire</button>
+                  <div style={{ fontSize: 12, color: 'var(--teal-deep)' }}>⏱ {c.duration}</div>
+                  <button
+                    onClick={() => navigate('/contact')}
+                    style={{
+                      padding: '8px 20px',
+                      background: 'var(--teal-dark)',
+                      border: '1px solid var(--teal-dark)',
+                      borderRadius: 50,
+                      fontSize: 12,
+                      fontWeight: 500,
+                      color: '#fff',
+                      cursor: 'pointer',
+                      transition: 'all .2s',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'var(--teal-deep)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'var(--teal-dark)'; }}
+                  >
+                    Enquire
+                  </button>
                 </div>
               </div>
             ))}
