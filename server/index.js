@@ -8,22 +8,30 @@ const path      = require('path');
 dotenv.config();
 const app = express();
 
-// ── CORS — allows localhost in dev, your Render frontend in production ──
+// ── CORS — add your Netlify URL here ──
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:3001',
   'http://localhost:3002',
-  'https://octa-website.onrender.com',   // ← your Render frontend URL
+  'https://octa-website.netlify.app',        // ← your Netlify URL
+  'https://www.octa-website.netlify.app',    // ← www version just in case
 ];
 
 app.use(cors({
   origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, Postman)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
+    console.log('Blocked by CORS:', origin);
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+// Handle preflight requests for all routes
+app.options('*', cors());
 
 app.use(express.json({ limit: '10kb' }));
 app.use('/api/', rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
