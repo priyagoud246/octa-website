@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+/* ── Image responsiveness ── */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Hero two-column → single column on mobile ── */
+@media (max-width: 768px) {
+  /* Hero grid */
+  div[style*="gridTemplateColumns:'1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Process steps 5-col → 1-col */
+  div[style*="repeat(5,1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Stats strip 4-col → 2-col */
+  div[style*="repeat(4,1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Audience cards full padding reset */
+  .glass-card img {
+    border-radius: 16px 16px 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Process steps → 1-col on very small screens */
+  div[style*="repeat(5,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  div[style*="repeat(4,1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
