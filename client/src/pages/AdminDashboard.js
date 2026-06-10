@@ -15,10 +15,10 @@ function useWindowWidth() {
 }
 
 const STATUS_COLOR = {
-  new:           { bg:'rgba(109,219,201,0.15)', color:'#6ddbc9',              border:'rgba(109,219,201,0.3)'  },
-  contacted:     { bg:'rgba(240,168,68,0.15)',  color:'#f0a844',              border:'rgba(240,168,68,0.3)'   },
-  'in-progress': { bg:'rgba(123,189,182,0.15)', color:'#7bbdb6',              border:'rgba(123,189,182,0.3)'  },
-  closed:        { bg:'rgba(255,255,255,0.05)', color:'rgba(255,255,255,0.4)',border:'rgba(255,255,255,0.1)'  },
+  new:           { bg:'rgba(109,219,201,0.15)', color:'#6ddbc9',               border:'rgba(109,219,201,0.3)'  },
+  contacted:     { bg:'rgba(240,168,68,0.15)',  color:'#f0a844',               border:'rgba(240,168,68,0.3)'   },
+  'in-progress': { bg:'rgba(123,189,182,0.15)', color:'#7bbdb6',               border:'rgba(123,189,182,0.3)'  },
+  closed:        { bg:'rgba(255,255,255,0.05)', color:'rgba(255,255,255,0.4)', border:'rgba(255,255,255,0.1)'  },
 };
 
 export default function AdminDashboard() {
@@ -99,7 +99,7 @@ export default function AdminDashboard() {
             backdropFilter:'blur(8px)',
             display:'flex', alignItems:'center', justifyContent:'center',
             padding: isMobile ? '16px' : '24px',
-            overflowY: 'auto',
+            overflowY:'auto',
           }}
         >
           <div
@@ -130,11 +130,15 @@ export default function AdminDashboard() {
               </div>
               <button
                 onClick={() => setSelected(null)}
-                style={{ background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.2)', borderRadius:8, width:36, height:36, color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}
+                style={{
+                  background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.2)',
+                  borderRadius:8, width:36, height:36, color:'#fff', fontSize:18,
+                  cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0,
+                }}
               >✕</button>
             </div>
 
-            {/* Contact details — stack on mobile */}
+            {/* Contact details */}
             <div style={{
               display:             'grid',
               gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
@@ -178,15 +182,15 @@ export default function AdminDashboard() {
                     key={s}
                     onClick={() => updateStatus(selected._id, s)}
                     style={{
-                      padding:    '8px 14px',
+                      padding:      '8px 14px',
                       borderRadius: 50,
-                      fontSize:   11,
-                      fontWeight: 600,
-                      cursor:     'pointer',
-                      transition: 'all .2s',
-                      border:     selected.status === s ? '2px solid rgba(255,255,255,0.6)' : '1px solid rgba(255,255,255,0.15)',
-                      background: selected.status === s ? STATUS_COLOR[s].bg : 'rgba(255,255,255,0.05)',
-                      color:      selected.status === s ? STATUS_COLOR[s].color : 'rgba(255,255,255,0.5)',
+                      fontSize:     11,
+                      fontWeight:   600,
+                      cursor:       'pointer',
+                      transition:   'all .2s',
+                      border:       selected.status === s ? '2px solid rgba(255,255,255,0.6)' : '1px solid rgba(255,255,255,0.15)',
+                      background:   selected.status === s ? STATUS_COLOR[s].bg  : 'rgba(255,255,255,0.05)',
+                      color:        selected.status === s ? STATUS_COLOR[s].color : 'rgba(255,255,255,0.5)',
                     }}
                   >{s}</button>
                 ))}
@@ -198,15 +202,16 @@ export default function AdminDashboard() {
               href={`mailto:${selected.email}?subject=RE: Your OCTA Enquiry — ${selected.interest}&body=Dear ${selected.firstName},%0D%0A%0D%0AThank you for your enquiry regarding ${selected.interest}.%0D%0A%0D%0A`}
               style={{
                 display:'block', padding:'13px',
-                background:'rgba(255,255,255,0.12)',
-                border:'1px solid rgba(255,255,255,0.25)',
-                borderRadius:12, textAlign:'center',
+                background:    'rgba(255,255,255,0.12)',
+                border:        '1px solid rgba(255,255,255,0.25)',
+                borderRadius:  12, textAlign:'center',
                 fontSize:14, fontWeight:600, color:'#fff',
                 textDecoration:'none', transition:'all .3s',
               }}
               onMouseEnter={e => e.target.style.background = 'rgba(255,255,255,0.2)'}
               onMouseLeave={e => e.target.style.background = 'rgba(255,255,255,0.12)'}
             >📤 Reply via Email</a>
+
           </div>
         </div>
       )}
@@ -276,7 +281,7 @@ export default function AdminDashboard() {
               {isMobile ? 'Tap a card to view details' : 'Click any row to see full details & message'}
             </p>
           </div>
-          {/* Filter pills — scrollable on mobile */}
+          {/* Filter pills — horizontally scrollable on mobile */}
           <div style={{ display:'flex', gap:8, overflowX:'auto', paddingBottom:4 }}>
             {[['','All'],['new','New'],['contacted','Contacted'],['in-progress','In Progress'],['closed','Closed']].map(([val, label]) => (
               <button
@@ -321,15 +326,14 @@ export default function AdminDashboard() {
                   transition:   'background .2s',
                 }}
                 onTouchStart={el => el.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
-                onTouchEnd={el => el.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+                onTouchEnd={el =>   el.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
               >
                 <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:8, gap:8 }}>
                   <div style={{ fontFamily:'Sora,sans-serif', fontSize:14, fontWeight:600 }}>
                     {e.firstName} {e.lastName}
                   </div>
                   <span style={{
-                    padding:'3px 10px', borderRadius:50, fontSize:10, fontWeight:700,
-                    flexShrink:0,
+                    padding:'3px 10px', borderRadius:50, fontSize:10, fontWeight:700, flexShrink:0,
                     background: STATUS_COLOR[e.status]?.bg,
                     color:      STATUS_COLOR[e.status]?.color,
                     border:     `1px solid ${STATUS_COLOR[e.status]?.border}`,
