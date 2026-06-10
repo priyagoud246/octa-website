@@ -18,15 +18,15 @@ const features = [
   { icon:'🏥', title:'Built for Both Institutions and Learners',  body:'Designed for hospitals, nursing colleges, educators, quality teams, and frontline staff alike.' },
   { icon:'📋', title:'NABH-Aligned, Not NABH-Approved',          body:'We provide training aligned to NABH standards. We do not claim accreditation authority.' },
   { icon:'🧬', title:'Practical, Not Generic',                    body:'Not just courses: templates, SOPs, mock audits, and on-the-ground implementation support.' },
-  { icon:'🧠', title:'Adaptive Learning Paths',                   body:'Personalised journeys that adapt to each clinician\'s needs, role, and competency level.' },
+  { icon:'🧠', title:'Adaptive Learning Paths',                   body:"Personalised journeys that adapt to each clinician's needs, role, and competency level." },
   { icon:'📊', title:'Compliance-Ready Analytics',                body:'Comprehensive reporting and audit trails for regulatory compliance and quality improvement.' },
 ];
 
 const stacks = [
-  { icon:'🏛️', title:'Foundation Stack',    color:'#4fc3f7', tags:['Fire Safety','Infection Control','Hand Hygiene'],                           desc:'Mandatory statutory training for all healthcare staff.' },
-  { icon:'🩺', title:'Clinical Stack',       color:'#81c784', tags:['ECG Interpretation','Ventilator Management','Pharmacology Basics'],         desc:'Specialised medical modules for clinical professionals.' },
-  { icon:'💬', title:'Soft-Skill Stack',     color:'#ffb74d', tags:['Patient Communication','Bedside Manner','Medical Ethics'],                 desc:'High-value interpersonal skills for better patient care.' },
-  { icon:'💻', title:'Digital Health Stack', color:'#ce93d8', tags:['Telemedicine Platforms','Government Portals (NTR Vaidya Seva)'],           desc:'Modern healthcare tools for the digital era.' },
+  { icon:'🏛️', title:'Foundation Stack',    color:'#4fc3f7', tags:['Fire Safety','Infection Control','Hand Hygiene'],                         desc:'Mandatory statutory training for all healthcare staff.' },
+  { icon:'🩺', title:'Clinical Stack',       color:'#81c784', tags:['ECG Interpretation','Ventilator Management','Pharmacology Basics'],       desc:'Specialised medical modules for clinical professionals.' },
+  { icon:'💬', title:'Soft-Skill Stack',     color:'#ffb74d', tags:['Patient Communication','Bedside Manner','Medical Ethics'],               desc:'High-value interpersonal skills for better patient care.' },
+  { icon:'💻', title:'Digital Health Stack', color:'#ce93d8', tags:['Telemedicine Platforms','Government Portals (NTR Vaidya Seva)'],         desc:'Modern healthcare tools for the digital era.' },
 ];
 
 const nabhDomains = [
@@ -41,19 +41,19 @@ const nabhDomains = [
 ];
 
 const problems = [
-  { icon:'📉', title:'Policy-to-Practice Gap',      body:'Standards exist but are not embedded in daily routines.' },
-  { icon:'⚙️', title:'Technology Without Process',  body:'Tools adopted without workflow discipline leave gaps in care.' },
-  { icon:'🎓', title:'Capability Gap',               body:'Lack of trained quality managers and educators at the ground level.' },
-  { icon:'🔄', title:'Incentive Mismatch',           body:'Focus on setup, not sustained compliance — quality fades after accreditation.' },
-  { icon:'🚧', title:'Change-Management Gap',        body:'Staff see compliance as extra work rather than part of daily practice.' },
+  { icon:'📉', title:'Policy-to-Practice Gap',     body:'Standards exist but are not embedded in daily routines.' },
+  { icon:'⚙️', title:'Technology Without Process', body:'Tools adopted without workflow discipline leave gaps in care.' },
+  { icon:'🎓', title:'Capability Gap',              body:'Lack of trained quality managers and educators at the ground level.' },
+  { icon:'🔄', title:'Incentive Mismatch',          body:'Focus on setup, not sustained compliance — quality fades after accreditation.' },
+  { icon:'🚧', title:'Change-Management Gap',       body:'Staff see compliance as extra work rather than part of daily practice.' },
 ];
 
 const processSteps = [
-  { num:'01', title:'Assess',   body:'Identify quality gaps and audit readiness needs.' },
-  { num:'02', title:'Train',    body:'Deliver NABH-aligned training via LMS, on-site, or hybrid.' },
-  { num:'03', title:'Equip',    body:'Provide templates, SOPs, and checklists.' },
-  { num:'04', title:'Audit',    body:'Conduct mock audits to prepare for the real audit.' },
-  { num:'05', title:'Support',  body:'Offer implementation support to embed standards into daily practice.' },
+  { num:'01', title:'Assess',  body:'Identify quality gaps and audit readiness needs.' },
+  { num:'02', title:'Train',   body:'Deliver NABH-aligned training via LMS, on-site, or hybrid.' },
+  { num:'03', title:'Equip',   body:'Provide templates, SOPs, and checklists.' },
+  { num:'04', title:'Audit',   body:'Conduct mock audits to prepare for the real audit.' },
+  { num:'05', title:'Support', body:'Offer implementation support to embed standards into daily practice.' },
 ];
 
 const audienceCards = [
@@ -82,24 +82,21 @@ const testimonials = [
   { quote:'Our nursing students are more confident and better prepared for real hospital roles.', name:'Nursing Educator', org:'Private College' },
 ];
 
-const imgBanner = {
-  width: '100%',
-  display: 'block',
-  borderRadius: 20,
-  border: '1px solid var(--t18)',
-  marginTop: 28,
-};
-
 export default function Home() {
   return (
     <div>
       {/* ── HERO ── */}
-      <div style={{ padding:'72px 48px 64px', maxWidth:1280, margin:'0 auto' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center', marginBottom:64 }}>
+      <div className="hero-section">
+
+        {/* hero-grid class handles 2-col desktop / 1-col mobile via CSS */}
+        <div className="hero-grid">
+
           {/* Left: text */}
           <div>
-            <div className="eyebrow fade-up" style={{ marginBottom:20 }}>NABH-Aligned Training for Hospitals &amp; Nursing Colleges</div>
-            <h1 className="fade-up d1" style={{ fontFamily:'Sora,sans-serif', fontSize:'clamp(32px,3.6vw,52px)', fontWeight:800, lineHeight:1.12, letterSpacing:'-0.02em', marginBottom:24 }}>
+            <div className="eyebrow fade-up" style={{ marginBottom:20 }}>
+              NABH-Aligned Training for Hospitals &amp; Nursing Colleges
+            </div>
+            <h1 className="fade-up d1" style={{ fontFamily:'Sora,sans-serif', fontSize:'clamp(28px,3.6vw,52px)', fontWeight:800, lineHeight:1.12, letterSpacing:'-0.02em', marginBottom:24, color:'var(--teal-dark)' }}>
               Training That Improves{' '}
               <em style={{ fontStyle:'normal', color:'var(--sage)' }}>Hospital Quality</em>{' '}
               and Makes Nursing Students{' '}
@@ -114,7 +111,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right: hero image — full image visible, no crop */}
+          {/* Right: hero image */}
           <div className="fade-up d2" style={{ borderRadius:24, overflow:'hidden', border:'1px solid var(--t18)', boxShadow:'0 20px 60px rgba(15,61,56,0.12)' }}>
             <img
               src={heroImg}
@@ -124,12 +121,12 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Stats strip */}
-        <div className="fade-up d4" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:1, background:'var(--t18)', border:'1px solid var(--t18)', borderRadius:20, overflow:'hidden' }}>
+        {/* Stats strip — stats-strip class handles 4-col → 2-col mobile */}
+        <div className="stats-strip fade-up d4">
           {stats.map(s => (
-            <div key={s.label} style={{ padding:'28px 24px', background:'#ffffff', textAlign:'center' }}>
-              <div style={{ fontFamily:'Sora,sans-serif', fontSize:36, fontWeight:800, letterSpacing:'-0.02em', lineHeight:1, color:'var(--teal-dark)' }}>{s.num}</div>
-              <div style={{ fontSize:11, fontWeight:300, letterSpacing:'0.12em', textTransform:'uppercase', color:'var(--teal-deep)', marginTop:8 }}>{s.label}</div>
+            <div key={s.label} style={{ padding:'28px 16px', background:'#ffffff', textAlign:'center' }}>
+              <div style={{ fontFamily:'Sora,sans-serif', fontSize:'clamp(24px,4vw,36px)', fontWeight:800, letterSpacing:'-0.02em', lineHeight:1, color:'var(--teal-dark)' }}>{s.num}</div>
+              <div style={{ fontSize:11, fontWeight:300, letterSpacing:'0.1em', textTransform:'uppercase', color:'var(--teal-deep)', marginTop:8 }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -176,12 +173,10 @@ export default function Home() {
             ))}
           </div>
         </div>
-
-        {/* oral-care image — full height, no crop */}
         <img
           src={oralCareImg}
           alt="Healthcare team practising oral care procedure on a simulation mannequin"
-          style={imgBanner}
+          style={{ width:'100%', borderRadius:20, border:'1px solid var(--t18)', marginTop:28 }}
         />
       </div>
 
@@ -242,10 +237,10 @@ export default function Home() {
           {[
             { icon:'🗺️', title:'Curriculum Mapping',        body:'Every module mapped to corresponding NABH topics and intent statements.' },
             { icon:'👨‍🏫', title:'Qualified Trainer Profiles', body:'Verified trainer credentials and subject-matter expertise on record.' },
-            { icon:'✅', title:'Attendance Tracking',        body:'Automated attendance and participation logs for every session.' },
-            { icon:'📝', title:'Assessment Records',         body:'Detailed records of all assessments, scores, and competency evaluations.' },
-            { icon:'🏅', title:'Completion Certificates',    body:'Timestamped, verifiable certificates issued on successful completion.' },
-            { icon:'🔄', title:'Feedback & Review Logs',     body:'Feedback forms and internal review logs documenting content updates.' },
+            { icon:'✅', title:'Attendance Tracking',         body:'Automated attendance and participation logs for every session.' },
+            { icon:'📝', title:'Assessment Records',          body:'Detailed records of all assessments, scores, and competency evaluations.' },
+            { icon:'🏅', title:'Completion Certificates',     body:'Timestamped, verifiable certificates issued on successful completion.' },
+            { icon:'🔄', title:'Feedback & Review Logs',      body:'Feedback forms and internal review logs documenting content updates.' },
           ].map(c => (
             <div key={c.title} className="glass-card">
               <div className="icon-box">{c.icon}</div>
@@ -254,12 +249,10 @@ export default function Home() {
             </div>
           ))}
         </div>
-
-        {/* oxygen-panel image — full height, no crop */}
         <img
           src={oxygenImg}
           alt="Wall-mounted oxygen and suction panel in a hospital simulation lab"
-          style={imgBanner}
+          style={{ width:'100%', borderRadius:20, border:'1px solid var(--t18)', marginTop:28 }}
         />
       </div>
 
@@ -288,9 +281,11 @@ export default function Home() {
         <p className="eyebrow">Our Process</p>
         <h2 className="sec-title">How It <em>Works</em></h2>
         <p className="sec-lead">A structured five-step process from assessment to sustained daily practice.</p>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(5,1fr)', gap:1, background:'var(--t18)', border:'1px solid var(--t18)', borderRadius:20, overflow:'hidden', marginTop:48 }}>
+
+        {/* process-grid class handles 5-col → 1-col mobile */}
+        <div className="process-grid">
           {processSteps.map(s => (
-            <div key={s.num} style={{ padding:'32px 24px', background:'#ffffff', textAlign:'center' }}>
+            <div key={s.num} style={{ padding:'32px 20px', background:'#ffffff', textAlign:'center' }}>
               <div style={{ fontFamily:'Sora,sans-serif', fontSize:28, fontWeight:800, color:'var(--sage)', lineHeight:1, marginBottom:12 }}>{s.num}</div>
               <div style={{ fontFamily:'Sora,sans-serif', fontSize:16, fontWeight:700, marginBottom:10, color:'var(--teal-dark)' }}>{s.title}</div>
               <div style={{ fontSize:13, fontWeight:300, lineHeight:1.6, color:'var(--teal-deep)' }}>{s.body}</div>
@@ -346,14 +341,12 @@ export default function Home() {
         <div className="grid-2" style={{ marginTop:48 }}>
           {audienceCards.map(a => (
             <div key={a.audience} className="glass-card" style={{ padding:0, overflow:'hidden' }}>
-              {/* Full image — no fixed height, no crop */}
               <img
                 src={a.img}
                 alt={a.imgAlt}
                 style={{ width:'100%', display:'block', borderRadius:'20px 20px 0 0' }}
               />
-              {/* Card content */}
-              <div style={{ padding:32 }}>
+              <div style={{ padding:28 }}>
                 <div style={{ fontSize:11, fontWeight:600, letterSpacing:'0.1em', textTransform:'uppercase', color:'var(--sage)', marginBottom:8 }}>{a.eyebrow}</div>
                 <div className="icon-box">{a.icon}</div>
                 <div className="card-title">{a.audience}</div>
