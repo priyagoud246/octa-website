@@ -27,14 +27,30 @@ export default function Login() {
   };
 
   return (
-    <div style={{ minHeight:'calc(100vh - 88px)', display:'flex', alignItems:'center', justifyContent:'center', padding:24 }}>
+    <div style={{
+      minHeight:      'calc(100vh - 88px)',
+      display:        'flex',
+      alignItems:     'center',
+      justifyContent: 'center',
+      padding:        '24px 16px',
+      boxSizing:      'border-box',
+    }}>
       {toast && <Toast message={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
 
-      <div style={{ background:'var(--w08)', border:'1px solid var(--w15)', borderRadius:24, padding:48, backdropFilter:'blur(16px)', width:'100%', maxWidth:440 }}>
-        <div style={{ textAlign:'center', marginBottom:36 }}>
+      <div style={{
+        background:    'var(--w08)',
+        border:        '1px solid var(--w15)',
+        borderRadius:  20,
+        padding:       'clamp(28px, 6vw, 48px)',
+        backdropFilter:'blur(16px)',
+        width:         '100%',
+        maxWidth:      440,
+        boxSizing:     'border-box',
+      }}>
+        <div style={{ textAlign:'center', marginBottom:32 }}>
           <div style={{ fontFamily:'Sora,sans-serif', fontWeight:800, fontSize:24, letterSpacing:'0.12em', marginBottom:4 }}>OCTA</div>
-          <div style={{ fontSize:11, letterSpacing:'0.25em', textTransform:'uppercase', color:'var(--w60)', marginBottom:24 }}>Healthcare Training</div>
-          <h2 style={{ fontFamily:'Sora,sans-serif', fontSize:24, fontWeight:700 }}>Sign In</h2>
+          <div style={{ fontSize:11, letterSpacing:'0.25em', textTransform:'uppercase', color:'var(--w60)', marginBottom:20 }}>Healthcare Training</div>
+          <h2 style={{ fontFamily:'Sora,sans-serif', fontSize:22, fontWeight:700, margin:0 }}>Sign In</h2>
         </div>
 
         <form onSubmit={submit}>
@@ -51,7 +67,7 @@ export default function Login() {
           </button>
         </form>
 
-        <p style={{ textAlign:'center', marginTop:24, fontSize:14, color:'var(--w60)' }}>
+        <p style={{ textAlign:'center', marginTop:20, fontSize:14, color:'var(--w60)' }}>
           Don't have an account?{' '}
           <Link to="/register" style={{ color:'var(--mist)', textDecoration:'none' }}>Register</Link>
         </p>
