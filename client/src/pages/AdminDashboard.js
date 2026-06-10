@@ -345,3 +345,86 @@ export default function AdminDashboard() {
                     {new Date(e.createdAt).toLocaleDateString('en-IN', { day:'2-digit', month:'short' })}
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          /* Desktop: table */
+          <>
+            <div style={{ overflowX:'auto' }}>
+              <table style={{ width:'100%', borderCollapse:'collapse' }}>
+                <thead>
+                  <tr style={{ borderBottom:'1px solid rgba(255,255,255,0.06)' }}>
+                    {['Name & Email','Institution','Interest','Status','Date','Action'].map(h => (
+                      <th key={h} style={{ padding:'14px 20px', textAlign:'left', fontSize:11, fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:'rgba(255,255,255,0.4)', whiteSpace:'nowrap' }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} style={{ padding:'48px 20px', textAlign:'center' }}>
+                        <div style={{ fontSize:32, marginBottom:12 }}>📭</div>
+                        <div style={{ fontSize:15, color:'rgba(255,255,255,0.4)' }}>No enquiries found</div>
+                      </td>
+                    </tr>
+                  ) : filtered.map(e => (
+                    <tr
+                      key={e._id}
+                      onClick={() => setSelected(e)}
+                      style={{ borderBottom:'1px solid rgba(255,255,255,0.05)', cursor:'pointer', transition:'background .2s' }}
+                      onMouseEnter={el => el.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+                      onMouseLeave={el => el.currentTarget.style.background = 'transparent'}
+                    >
+                      <td style={{ padding:'16px 20px' }}>
+                        <div style={{ fontFamily:'Sora,sans-serif', fontSize:14, fontWeight:600, marginBottom:3 }}>{e.firstName} {e.lastName}</div>
+                        <div style={{ fontSize:12, color:'rgba(200,222,221,0.7)' }}>📧 {e.email}</div>
+                      </td>
+                      <td style={{ padding:'16px 20px', fontSize:13, color:'rgba(255,255,255,0.6)' }}>{e.institution}</td>
+                      <td style={{ padding:'16px 20px', fontSize:12, color:'rgba(255,255,255,0.55)', maxWidth:200, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{e.interest}</td>
+                      <td style={{ padding:'16px 20px' }}>
+                        <span style={{
+                          padding:'5px 14px', borderRadius:50, fontSize:11, fontWeight:700, letterSpacing:'0.05em',
+                          background: STATUS_COLOR[e.status]?.bg,
+                          color:      STATUS_COLOR[e.status]?.color,
+                          border:     `1px solid ${STATUS_COLOR[e.status]?.border}`,
+                        }}>{e.status}</span>
+                      </td>
+                      <td style={{ padding:'16px 20px', fontSize:12, color:'rgba(255,255,255,0.4)', whiteSpace:'nowrap' }}>
+                        {new Date(e.createdAt).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' })}
+                      </td>
+                      <td style={{ padding:'16px 20px' }} onClick={ev => ev.stopPropagation()}>
+                        <select
+                          value={e.status}
+                          onChange={ev => updateStatus(e._id, ev.target.value)}
+                          style={{
+                            padding:'8px 12px', background:'rgba(255,255,255,0.08)',
+                            border:'1px solid rgba(255,255,255,0.15)', borderRadius:10,
+                            color:'#fff', fontSize:12, cursor:'pointer', outline:'none',
+                            appearance:'none', paddingRight:28,
+                            backgroundImage:`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff80' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
+                            backgroundRepeat:'no-repeat', backgroundPosition:'right 10px center',
+                          }}
+                        >
+                          {['new','contacted','in-progress','closed'].map(s => (
+                            <option key={s} value={s} style={{ background:'#1a3d3a' }}>{s}</option>
+                          ))}
+                        </select>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {filtered.length > 0 && (
+              <div style={{ padding:'14px 28px', borderTop:'1px solid rgba(255,255,255,0.06)', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+                <span style={{ fontSize:12, color:'rgba(255,255,255,0.3)' }}>Showing {filtered.length} of {enquiries.length} enquiries</span>
+                <span style={{ fontSize:12, color:'rgba(255,255,255,0.3)' }}>👆 Click any row to view full details</span>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
