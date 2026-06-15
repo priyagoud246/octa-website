@@ -1,38 +1,49 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function AuthCallback() {
   const navigate = useNavigate();
   const { loginWithData } = useAuth();
+  const hasRun = useRef(false); // ← Prevents double-execution
 
   useEffect(() => {
-    // 1. Get parameters directly from the browser's URL object
+    if (hasRun.current) return;
+    hasRun.current = true;
+
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
-    const user = urlParams.get('user');
+    const userParam = urlParams.get('user');
 
-    console.log("DEBUG: Token found:", !!token);
+    console.log("DEBUG: Full URL:", window.location.href);
+    console.log("DEBUG: Token:", token);
+    console.log("DEBUG: User param:", userParam);
 
-    if (token && user) {
-      try {
-        const parsedUser = JSON.parse(decodeURIComponent(user));
-        
-        // 2. Perform the login action
-        loginWithData(token, parsedUser);
-        
-        // 3. Force redirect using replace
-        console.log("DEBUG: Redirecting to dashboard...");
-        navigate('/', { replace: true });
-      } catch (err) {
-        console.error("DEBUG: Parse error", err);
-      }
+    if (!token) {
+      console.error("DEBUG: No token found — redirecting to login");
+      navigate('/login', { replace: true });
+      return;
     }
-  }, [navigate, loginWithData]);
+
+    try {
+      // Handle case where 'user' param may be missing
+      const parsedUser = userParam
+        ? JSON.parse(decodeURIComponent(userParam))
+        : null;
+
+      loginWithData(token, parsedUser);
+
+      console.log("DEBUG: Login success, redirecting...");
+      navigate('/', { replace: true });
+    } catch (err) {
+      console.error("DEBUG: Parse error:", err);
+      navigate('/login', { replace: true });
+    }
+  }, []); // ← Empty deps — runs once only, ref guards against StrictMode double-fire
 
   return (
     <div style={{ padding: '50px', textAlign: 'center' }}>
-      <h1>Processing... Check your Console!</h1>
+      <p>Signing you in...</p>
     </div>
   );
 }
