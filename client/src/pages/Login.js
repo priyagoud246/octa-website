@@ -135,7 +135,6 @@ export default function Login() {
 
         <div style={{ marginTop:20, padding:'12px 16px', background:'rgba(15,61,56,0.04)', border:'1px solid rgba(15,61,56,0.08)', borderRadius:10 }}>
           <p style={{ fontSize:12, color:'#4a9e94', textAlign:'center', lineHeight:1.6 }}>
-            Admin access is by invitation only.<br/>Contact your system administrator for credentials.
           </p>
         </div>
       </div>
