@@ -7,30 +7,32 @@ export default function AuthCallback() {
   const { loginWithData } = useAuth();
 
   useEffect(() => {
-    // Force grab from window.location directly
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get('token');
-    const userRaw = params.get('user');
+    // 1. Get parameters directly from the browser's URL object
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const user = urlParams.get('user');
 
-    if (token && userRaw) {
+    console.log("DEBUG: Token found:", !!token);
+
+    if (token && user) {
       try {
-        const user = JSON.parse(decodeURIComponent(userRaw));
+        const parsedUser = JSON.parse(decodeURIComponent(user));
         
-        // 1. Log the data to verify it arrived
-        console.log("AuthCallback received:", { token, user });
-
-        // 2. Set the auth state
-        loginWithData(token, user);
-
-        // 3. Force redirect to dashboard/home
-        // Using replace: true clears the callback from browser history
+        // 2. Perform the login action
+        loginWithData(token, parsedUser);
+        
+        // 3. Force redirect using replace
+        console.log("DEBUG: Redirecting to dashboard...");
         navigate('/', { replace: true });
-      } catch (e) {
-        console.error("Failed to parse user:", e);
-        navigate('/login');
+      } catch (err) {
+        console.error("DEBUG: Parse error", err);
       }
     }
   }, [navigate, loginWithData]);
 
-  return <div>Processing Login...</div>;
+  return (
+    <div style={{ padding: '50px', textAlign: 'center' }}>
+      <h1>Processing... Check your Console!</h1>
+    </div>
+  );
 }
