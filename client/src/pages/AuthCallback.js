@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function AuthCallback() {
   const navigate = useNavigate();
+  const { loginWithData } = useAuth();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -10,16 +12,12 @@ export default function AuthCallback() {
     const user   = params.get('user');
 
     if (token && user) {
-      // Save to localStorage
-      localStorage.setItem('octa_token', token);
-      localStorage.setItem('octa_user',  decodeURIComponent(user));
-      // Redirect to home
+      loginWithData(token, JSON.parse(decodeURIComponent(user)));
       navigate('/', { replace: true });
-      window.location.reload(); // refresh so AuthContext picks up new user
     } else {
       navigate('/login?error=google_failed', { replace: true });
     }
-  }, [navigate]);
+  }, [navigate, loginWithData]);
 
   return (
     <div style={{

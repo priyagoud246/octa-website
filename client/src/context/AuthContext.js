@@ -7,7 +7,6 @@ export const AuthProvider = ({ children }) => {
   const [user,    setUser]    = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // On mount: restore user from localStorage
   useEffect(() => {
     const saved = localStorage.getItem('octa_user');
     if (saved) setUser(JSON.parse(saved));
@@ -36,8 +35,14 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const loginWithData = (token, user) => {
+    localStorage.setItem('octa_token', token);
+    localStorage.setItem('octa_user',  JSON.stringify(user));
+    setUser(user);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, loginWithData }}>
       {children}
     </AuthContext.Provider>
   );
