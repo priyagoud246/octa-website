@@ -4,39 +4,60 @@ const cors      = require('cors');
 const dotenv    = require('dotenv');
 const rateLimit = require('express-rate-limit');
 const path      = require('path');
+const passport  = require('./config/passport');  // ← ADD
+const jwt       = require('jsonwebtoken');        // ← ADD
 
 dotenv.config();
 const app = express();
 
-// ── CORS — add your Netlify URL here ──
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:3001',
   'http://localhost:3002',
-  'https://octa-website.netlify.app',        // ← your Netlify URL
-  'https://www.octa-website.netlify.app',    // ← www version just in case
+  'https://octa-website.netlify.app',
 ];
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, curl, Postman)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
-    console.log('Blocked by CORS:', origin);
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Handle preflight requests for all routes
-app.options('*', cors());
-
 app.use(express.json({ limit: '10kb' }));
+app.use(passport.initialize());  // ← ADD THIS
 app.use('/api/', rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 
-// ── ROUTES WITH VALIDATION ──
+// ── GOOGLE AUTH ROUTES ── (ADD THESE)
+app.get('/api/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get('/api/auth/google/callback',
+  passport.authenticate('google', { session: false, failureRedirect: `${process.env.CLIENT_URL}/login?error=google_failed` }),
+  (req, res) => {
+    // Make JWT token for the user
+    const token = jwt.sign(
+      { id: req.user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRE }
+    );
+    const user = {
+      id:    req.user._id,
+      name:  req.user.name,
+      email: req.user.email,
+      role:  req.user.role,
+    };
+    // Redirect to frontend with token in URL
+    res.redirect(
+      `${process.env.CLIENT_URL}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`
+    );
+  }
+);
+
+// ── EXISTING ROUTES ──
 const authRoutes    = require('./routes/auth');
 const enquiryRoutes = require('./routes/enquiry');
 const coursesRoutes = require('./routes/courses');
@@ -61,7 +82,6 @@ app.get('/api/health', (req, res) =>
   res.json({ success: true, message: 'OCTA API running ✅' })
 );
 
-// ── SERVE REACT BUILD IN PRODUCTION ──
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
   app.get('*', (req, res) =>
@@ -69,7 +89,6 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 
-// ── GLOBAL ERROR HANDLER ──
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({
     success: false,
@@ -77,7 +96,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ── CONNECT DB THEN START SERVER ──
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('✅ MongoDB connected');
