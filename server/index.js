@@ -1,13 +1,15 @@
+// ── dotenv MUST be first — before any require that reads process.env ──
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express   = require('express');
 const mongoose  = require('mongoose');
 const cors      = require('cors');
-const dotenv    = require('dotenv');
 const rateLimit = require('express-rate-limit');
 const path      = require('path');
-const passport  = require('./config/passport');  // ← ADD
-const jwt       = require('jsonwebtoken');        // ← ADD
+const passport  = require('./config/passport');
+const jwt       = require('jsonwebtoken');
 
-dotenv.config();
 const app = express();
 
 const allowedOrigins = [
@@ -27,18 +29,20 @@ app.use(cors({
 }));
 
 app.use(express.json({ limit: '10kb' }));
-app.use(passport.initialize());  // ← ADD THIS
+app.use(passport.initialize());
 app.use('/api/', rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 
-// ── GOOGLE AUTH ROUTES ── (ADD THESE)
+// ── GOOGLE AUTH ROUTES ──
 app.get('/api/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
 app.get('/api/auth/google/callback',
-  passport.authenticate('google', { session: false, failureRedirect: `${process.env.CLIENT_URL}/login?error=google_failed` }),
+  passport.authenticate('google', {
+    session: false,
+    failureRedirect: `${process.env.CLIENT_URL}/login?error=google_failed`,
+  }),
   (req, res) => {
-    // Make JWT token for the user
     const token = jwt.sign(
       { id: req.user._id },
       process.env.JWT_SECRET,
@@ -50,7 +54,6 @@ app.get('/api/auth/google/callback',
       email: req.user.email,
       role:  req.user.role,
     };
-    // Redirect to frontend with token in URL
     res.redirect(
       `${process.env.CLIENT_URL}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`
     );
