@@ -11,10 +11,25 @@ export default function AuthCallback() {
     const token  = params.get('token');
     const user   = params.get('user');
 
+    console.log('=== AuthCallback Debug ===');
+    console.log('Full URL:', window.location.href);
+    console.log('Search:', window.location.search);
+    console.log('token:', token);
+    console.log('user raw:', user);
+    console.log('loginWithData fn:', typeof loginWithData);
+
     if (token && user) {
-      loginWithData(token, JSON.parse(decodeURIComponent(user)));
-      navigate('/', { replace: true });
+      try {
+        const parsedUser = JSON.parse(decodeURIComponent(user));
+        console.log('parsedUser:', parsedUser);
+        loginWithData(token, parsedUser);
+        navigate('/', { replace: true });
+      } catch (err) {
+        console.error('Parse error:', err);
+        navigate('/login?error=parse_failed', { replace: true });
+      }
     } else {
+      console.log('Missing token or user');
       navigate('/login?error=google_failed', { replace: true });
     }
   }, [navigate, loginWithData]);
