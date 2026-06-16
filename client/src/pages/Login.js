@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Toast from '../components/Toast';
 
-// Google icon SVG
 const GoogleIcon = () => (
   <svg width="20" height="20" viewBox="0 0 48 48">
     <path fill="#FFC107" d="M43.6 20H24v8h11.3C33.6 33.1 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8 20-20 0-1.3-.1-2.7-.4-4z"/>
@@ -14,7 +13,7 @@ const GoogleIcon = () => (
 );
 
 export default function Login() {
-  const [form,    setForm]    = useState({ email:'', password:'' });
+  const [form,    setForm]    = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [toast,   setToast]   = useState(null);
   const { login } = useAuth();
@@ -27,20 +26,17 @@ export default function Login() {
     setLoading(true);
     try {
       const user = await login(form.email, form.password);
-      setToast({ msg: `Welcome back, ${user.name.split(' ')[0]}! 👋`, type:'success' });
+      setToast({ msg: `Welcome back, ${user.name.split(' ')[0]}! 👋`, type: 'success' });
       setTimeout(() => navigate(user.role === 'admin' ? '/admin' : '/'), 1000);
     } catch (err) {
-      setToast({ msg: err.response?.data?.message || 'Incorrect email or password', type:'error' });
+      setToast({ msg: err.response?.data?.message || 'Incorrect email or password', type: 'error' });
     } finally {
       setLoading(false);
     }
   };
 
   const handleGoogleLogin = () => {
-    const backendURL = process.env.REACT_APP_API_URL
-      ? process.env.REACT_APP_API_URL.replace('/api', '')
-      : 'http://localhost:5000';
-    window.location.href = `${backendURL}/api/auth/google`;
+    window.location.href = 'https://octa-website-5ruy.onrender.com/api/auth/google';
   };
 
   return (
@@ -60,18 +56,16 @@ export default function Login() {
         boxShadow: '0 8px 40px rgba(15,61,56,0.10)',
       }}>
 
-        {/* Header */}
-        <div style={{ textAlign:'center', marginBottom:36 }}>
-          <div style={{ width:52, height:52, background:'#0f3d38', borderRadius:14, display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 16px' }}>
-            <span style={{ fontFamily:'Sora,sans-serif', fontWeight:800, fontSize:18, color:'#fff' }}>OC</span>
+        <div style={{ textAlign: 'center', marginBottom: 36 }}>
+          <div style={{ width: 52, height: 52, background: '#0f3d38', borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+            <span style={{ fontFamily: 'Sora,sans-serif', fontWeight: 800, fontSize: 18, color: '#fff' }}>OC</span>
           </div>
-          <h2 style={{ fontFamily:'Sora,sans-serif', fontSize:26, fontWeight:800, color:'#0f3d38', marginBottom:6 }}>
+          <h2 style={{ fontFamily: 'Sora,sans-serif', fontSize: 26, fontWeight: 800, color: '#0f3d38', marginBottom: 6 }}>
             Welcome Back
           </h2>
-          <p style={{ fontSize:14, color:'#4a9e94' }}>Sign in to your OCTA account</p>
+          <p style={{ fontSize: 14, color: '#4a9e94' }}>Sign in to your OCTA account</p>
         </div>
 
-        {/* Google Sign In Button */}
         <button
           type="button"
           onClick={handleGoogleLogin}
@@ -86,58 +80,51 @@ export default function Login() {
             boxShadow: '0 2px 8px rgba(15,61,56,0.06)',
             marginBottom: 20,
           }}
-          onMouseEnter={e => { e.currentTarget.style.boxShadow='0 4px 16px rgba(15,61,56,0.12)'; e.currentTarget.style.borderColor='rgba(15,61,56,0.3)'; }}
-          onMouseLeave={e => { e.currentTarget.style.boxShadow='0 2px 8px rgba(15,61,56,0.06)'; e.currentTarget.style.borderColor='rgba(15,61,56,0.15)'; }}
+          onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 4px 16px rgba(15,61,56,0.12)'; e.currentTarget.style.borderColor = 'rgba(15,61,56,0.3)'; }}
+          onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 2px 8px rgba(15,61,56,0.06)'; e.currentTarget.style.borderColor = 'rgba(15,61,56,0.15)'; }}
         >
           <GoogleIcon />
           Continue with Google
         </button>
 
-        {/* Divider */}
-        <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:20 }}>
-          <div style={{ flex:1, height:1, background:'rgba(15,61,56,0.10)' }} />
-          <span style={{ fontSize:13, color:'#4a9e94', fontWeight:500 }}>or sign in with email</span>
-          <div style={{ flex:1, height:1, background:'rgba(15,61,56,0.10)' }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(15,61,56,0.10)' }} />
+          <span style={{ fontSize: 13, color: '#4a9e94', fontWeight: 500 }}>or sign in with email</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(15,61,56,0.10)' }} />
         </div>
 
-        {/* Email / Password form */}
         <form onSubmit={submit}>
           <div className="form-group">
             <label className="form-label">Email Address</label>
             <input
               name="email" type="email" value={form.email} onChange={change}
-              className="form-input" placeholder="priyanka@octa.in"
+              className="form-input"
               required autoComplete="email"
             />
           </div>
-          <div className="form-group" style={{ marginBottom:28 }}>
+          <div className="form-group" style={{ marginBottom: 28 }}>
             <label className="form-label">Password</label>
             <input
               name="password" type="password" value={form.password} onChange={change}
-              className="form-input" placeholder="••••••••"
+              className="form-input"
               required autoComplete="current-password"
             />
           </div>
           <button type="submit" className="btn-primary"
-            style={{ width:'100%', justifyContent:'center', padding:'15px' }}
+            style={{ width: '100%', justifyContent: 'center', padding: '15px' }}
             disabled={loading}
           >
             {loading ? 'Signing in…' : 'Sign In →'}
           </button>
         </form>
 
-        <p style={{ textAlign:'center', marginTop:24, fontSize:14, color:'#4a9e94' }}>
+        <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: '#4a9e94' }}>
           Don't have an account?{' '}
-          <Link to="/register" style={{ color:'#0f3d38', textDecoration:'none', fontWeight:700 }}>
+          <Link to="/register" style={{ color: '#0f3d38', textDecoration: 'none', fontWeight: 700 }}>
             Create one
           </Link>
         </p>
 
-        <div style={{ marginTop:20, padding:'12px 16px', background:'rgba(15,61,56,0.04)', border:'1px solid rgba(15,61,56,0.08)', borderRadius:10 }}>
-          <p style={{ fontSize:12, color:'#4a9e94', textAlign:'center', lineHeight:1.6 }}>
-            Admin access is by invitation only.<br/>Contact your system administrator for credentials.
-          </p>
-        </div>
       </div>
     </div>
   );

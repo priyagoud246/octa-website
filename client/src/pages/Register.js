@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Toast from '../components/Toast';
 
-// Google icon SVG — same as Login.js
 const GoogleIcon = () => (
   <svg width="20" height="20" viewBox="0 0 48 48">
     <path fill="#FFC107" d="M43.6 20H24v8h11.3C33.6 33.1 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8 20-20 0-1.3-.1-2.7-.4-4z"/>
@@ -14,7 +13,7 @@ const GoogleIcon = () => (
 );
 
 export default function Register() {
-  const [form,    setForm]    = useState({ name:'', email:'', password:'', institution:'', phone:'' });
+  const [form,    setForm]    = useState({ name: '', email: '', password: '', institution: '', phone: '' });
   const [loading, setLoading] = useState(false);
   const [toast,   setToast]   = useState(null);
   const { register } = useAuth();
@@ -27,10 +26,10 @@ export default function Register() {
     setLoading(true);
     try {
       await register(form);
-      setToast({ msg:'Account created! Redirecting…', type:'success' });
+      setToast({ msg: 'Account created! Redirecting…', type: 'success' });
       setTimeout(() => navigate('/'), 1200);
     } catch (err) {
-      setToast({ msg: err.response?.data?.message || 'Registration failed', type:'error' });
+      setToast({ msg: err.response?.data?.message || 'Registration failed', type: 'error' });
     } finally {
       setLoading(false);
     }
@@ -38,7 +37,6 @@ export default function Register() {
 
   const handleGoogleLogin = () => {
     window.location.href = 'https://octa-website-5ruy.onrender.com/api/auth/google';
-    // For local dev use: http://localhost:5000/api/auth/google
   };
 
   return (
@@ -59,22 +57,20 @@ export default function Register() {
         boxShadow: '0 8px 40px rgba(15,61,56,0.10)',
       }}>
 
-        {/* Header */}
-        <div style={{ textAlign:'center', marginBottom:36 }}>
+        <div style={{ textAlign: 'center', marginBottom: 36 }}>
           <div style={{
-            width:52, height:52, background:'#0f3d38', borderRadius:14,
-            display:'flex', alignItems:'center', justifyContent:'center',
-            margin:'0 auto 16px'
+            width: 52, height: 52, background: '#0f3d38', borderRadius: 14,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            margin: '0 auto 16px'
           }}>
-            <span style={{ fontFamily:'Sora,sans-serif', fontWeight:800, fontSize:18, color:'#fff' }}>OC</span>
+            <span style={{ fontFamily: 'Sora,sans-serif', fontWeight: 800, fontSize: 18, color: '#fff' }}>OC</span>
           </div>
-          <h2 style={{ fontFamily:'Sora,sans-serif', fontSize:26, fontWeight:800, color:'#0f3d38', marginBottom:6 }}>
+          <h2 style={{ fontFamily: 'Sora,sans-serif', fontSize: 26, fontWeight: 800, color: '#0f3d38', marginBottom: 6 }}>
             Create Account
           </h2>
-          <p style={{ fontSize:14, color:'#4a9e94' }}>Join OCTA Healthcare Training</p>
+          <p style={{ fontSize: 14, color: '#4a9e94' }}>Join OCTA Healthcare Training</p>
         </div>
 
-        {/* Google Button */}
         <button
           type="button"
           onClick={handleGoogleLogin}
@@ -102,21 +98,19 @@ export default function Register() {
           Continue with Google
         </button>
 
-        {/* Divider */}
-        <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:20 }}>
-          <div style={{ flex:1, height:1, background:'rgba(15,61,56,0.10)' }} />
-          <span style={{ fontSize:13, color:'#4a9e94', fontWeight:500 }}>or register with email</span>
-          <div style={{ flex:1, height:1, background:'rgba(15,61,56,0.10)' }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(15,61,56,0.10)' }} />
+          <span style={{ fontSize: 13, color: '#4a9e94', fontWeight: 500 }}>or register with email</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(15,61,56,0.10)' }} />
         </div>
 
-        {/* Form */}
         <form onSubmit={submit}>
 
           <div className="form-group">
             <label className="form-label">Full Name</label>
             <input
               name="name" value={form.name} onChange={change}
-              className="form-input" placeholder="Dr. Priya Sharma"
+              className="form-input"
               required
             />
           </div>
@@ -125,7 +119,7 @@ export default function Register() {
             <label className="form-label">Email Address</label>
             <input
               name="email" type="email" value={form.email} onChange={change}
-              className="form-input" placeholder="priya@hospital.in"
+              className="form-input"
               required autoComplete="email"
             />
           </div>
@@ -134,44 +128,41 @@ export default function Register() {
             <label className="form-label">Password</label>
             <input
               name="password" type="password" value={form.password} onChange={change}
-              className="form-input" placeholder="Min 6 characters"
+              className="form-input"
               required autoComplete="new-password"
             />
           </div>
 
-          {/* Phone + Institution side by side */}
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div className="form-group">
               <label className="form-label">
                 Phone{' '}
-                <span style={{ fontSize:10, fontWeight:400, color:'#4a9e94',
-                  textTransform:'none', letterSpacing:0 }}>
+                <span style={{ fontSize: 10, fontWeight: 400, color: '#4a9e94', textTransform: 'none', letterSpacing: 0 }}>
                   optional
                 </span>
               </label>
               <input
                 name="phone" value={form.phone} onChange={change}
-                className="form-input" placeholder="+91 98765 43210"
+                className="form-input"
               />
             </div>
             <div className="form-group">
               <label className="form-label">
                 Institution{' '}
-                <span style={{ fontSize:10, fontWeight:400, color:'#4a9e94',
-                  textTransform:'none', letterSpacing:0 }}>
+                <span style={{ fontSize: 10, fontWeight: 400, color: '#4a9e94', textTransform: 'none', letterSpacing: 0 }}>
                   optional
                 </span>
               </label>
               <input
                 name="institution" value={form.institution} onChange={change}
-                className="form-input" placeholder="Apollo Hospitals"
+                className="form-input"
               />
             </div>
           </div>
 
           <button
             type="submit" className="btn-primary"
-            style={{ width:'100%', justifyContent:'center', padding:'15px', marginTop:8 }}
+            style={{ width: '100%', justifyContent: 'center', padding: '15px', marginTop: 8 }}
             disabled={loading}
           >
             {loading ? 'Creating…' : 'Create Account →'}
@@ -179,9 +170,9 @@ export default function Register() {
 
         </form>
 
-        <p style={{ textAlign:'center', marginTop:24, fontSize:14, color:'#4a9e94' }}>
+        <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: '#4a9e94' }}>
           Already have an account?{' '}
-          <Link to="/login" style={{ color:'#0f3d38', textDecoration:'none', fontWeight:700 }}>
+          <Link to="/login" style={{ color: '#0f3d38', textDecoration: 'none', fontWeight: 700 }}>
             Sign in
           </Link>
         </p>
