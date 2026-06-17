@@ -79,7 +79,7 @@ export default function AdminDashboard() {
   );
 
   return (
-    // ↓ ONLY CHANGE: className="admin-page" added, background/color removed from style
+    
     <div className="admin-page" style={{
       padding:   isMobile ? '80px 16px 40px' : '100px 48px 60px',
       boxSizing: 'border-box',
